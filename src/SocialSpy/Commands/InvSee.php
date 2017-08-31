@@ -27,12 +27,12 @@ class InvSee implements CommandExecutor {
                                                 $sender->sendMessage(TF::RED . "Sorry, " . $name . " is not online!");
                                         }
                                 } else {
-                                        $sender->sendMessage(TF::RED . "You don't have permissions to use this command.");
+                                        $sender->sendMessage(TF::RED . "Not showing due to self-leak information.");
                                 }
                         } elseif($this->plugin->isViewing($sender->getName())) {
                                 $this->plugin->stopViewing($sender->getName());
                         } else {
-                                $sender->sendMessage(TF::RED . "Please specify a player!");
+                                $sender->sendMessage(TF::RED . "§7Please use: §e/isee <player> §7or §e/invsee <player>");
                         }
                 } else {
                         $sender->sendMessage(TF::RED . "Please run this command in-game!");
