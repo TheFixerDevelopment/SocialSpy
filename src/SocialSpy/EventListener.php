@@ -86,7 +86,7 @@ class EventListener extends PluginBase implements Listener{
 				            foreach($this->getPlugin()->snoopers as $snooper) {
 					            if($msg[0] == "/") {
 						            if(stripos($msg, "login") || stripos($msg, "log") || stripos($msg, "reg") || stripos($msg, "register")) {
-							            $snooper->sendMessage($sender->getName() . "> §cNot showing due to self-leak information.);	
+							            $snooper->sendMessage($sender->getName() . "> §cNot showing due to self-leak information.");	
 						            } else {
 							            $snooper->sendMessage($sender->getName() . "> " . $msg);
 						            }
