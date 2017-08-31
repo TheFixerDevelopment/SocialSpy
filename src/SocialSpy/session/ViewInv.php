@@ -28,7 +28,7 @@ class ViewInv {
                 $this->owner->getInventory()->sendArmorContents($this->owner);
                 $this->owner->getInventory()->setContents($this->target->getInventory()->getContents());
                 $this->owner->getInventory()->sendContents($this->owner);
-                $this->owner->sendMessage(TF::GREEN . "You are now viewing " . TF::BOLD . TF::DARK_AQUA . $this->target->getName() . TF::RESET . TF::GREEN . "'s inventory, run " . TF::BOLD . TF::DARK_AQUA . "/viewinv" . TF::RESET . TF::GREEN . " to exit.");
+                $this->owner->sendMessage(TF::GREEN . "§bYou are now viewing " . TF::BOLD . TF::DARK_AQUA . $this->target->getName() . TF::RESET . TF::GREEN . "'s §binventory, run " . TF::BOLD . TF::DARK_AQUA . "§bPlease use: §3/viewinv" . TF::RESET . TF::GREEN . " §bto exit.");
                 
         }
         
@@ -40,7 +40,7 @@ class ViewInv {
                         $this->owner->getInventory()->setContents($this->lastKnownInv->getContents());
                         $this->owner->getInventory()->sendContents($this->owner);
                         $this->lastKnownInv = null;
-                        $this->owner->sendMessage(TF::GOLD . "You are no longer viewing " . TF::BOLD . TF::DARK_AQUA . $this->target->getName() . TF::RESET . TF::GOLD . "'s inventory!");
+                        $this->owner->sendMessage(TF::GOLD . "§bYou are no longer viewing " . TF::BOLD . TF::DARK_AQUA . $this->target->getName() . TF::RESET . TF::GOLD . "'s §binventory!");
                 }
         }
         
