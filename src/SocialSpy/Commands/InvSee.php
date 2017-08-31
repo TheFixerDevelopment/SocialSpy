@@ -15,7 +15,7 @@ class InvSee implements CommandExecutor {
         public function __construct(Main $plugin) {
                 $this->plugin = $plugin;
         }
-        public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) : bool{
+        public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
                 if($sender instanceof Player) {
                         if(isset($args[0])) {
                                 $name = $args[0];
