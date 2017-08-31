@@ -14,7 +14,7 @@ class CmdSnooper implements CommandExecutor{
       $this->plugin = $plugin;
     }
 
-    public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool{
+    public function onCommand(CommandSender $sender, Command $command, $label, array $args) {
       if(!$this->plugin->isAuthorized($sender)){
         $this->plugin->authorize($sender);
         return true;
