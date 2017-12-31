@@ -15,7 +15,7 @@ class InvSee implements CommandExecutor {
         public function __construct(Main $plugin) {
                 $this->plugin = $plugin;
         }
-        public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) : bool{
+        public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args) : bool{
                 if($sender instanceof Player) {
                         if(isset($args[0])) {
                                 $name = $args[0];
@@ -23,19 +23,25 @@ class InvSee implements CommandExecutor {
                                 if($sender->hasPermission("inventoryclear.viewinv")) {
                                         if($target instanceof Player) {
                                                 $this->plugin->viewInventory($sender, $target);
+                                                return true;
                                         } else {
                                                 $sender->sendMessage(TF::RED . "Sorry, " . $name . " is not online!");
+                                                return true;
                                         }
                                 } else {
                                         $sender->sendMessage(TF::RED . "You don't have permissions to use this command.");
+                                        return true;
                                 }
                         } elseif($this->plugin->isViewing($sender->getName())) {
                                 $this->plugin->stopViewing($sender->getName());
+                                return true;
                         } else {
                                 $sender->sendMessage(TF::RED . "Please specify a player!");
+                                return true;
                         }
                 } else {
                         $sender->sendMessage(TF::RED . "Please run this command in-game!");
+                        return true;
                 }
         }
 }
