@@ -9,7 +9,7 @@ use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerCommandPreprocessEvent;
-//use pocketmine\event\inventory\InventoryCloseEvent;
+use pocketmine\event\inventory\InventoryCloseEvent;
 use pocketmine\event\player\PlayerDropItemEvent;
 use pocketmine\event\inventory\InventoryPickupItemEvent;
 use pocketmine\event\block\BlockPlaceEvent;
@@ -25,6 +25,7 @@ class EventListener extends PluginBase implements Listener{
                 if($this->plugin->isViewing($player->getName())) {
                         $event->setCancelled(true);
                         $player->sendMessage(TF::RED . "You can't drop items while viewing a players inventory!");
+			return true;
                 }
         }
         
@@ -33,6 +34,7 @@ class EventListener extends PluginBase implements Listener{
                         if($this->plugin->isViewing($player->getName())) {
                                 $event->setCancelled(true);
                                 $player->sendMessage(TF::RED . "You can't pick up items while viewing a players inventory!");
+				return true;
                         }
                 }
         }
@@ -42,6 +44,7 @@ class EventListener extends PluginBase implements Listener{
                 if($this->plugin->isViewing($player->getName())) {
                         $event->setCancelled(true);
                         $player->sendMessage(TF::RED . "You can't place blocks while viewing a players inventory!");
+			return true;
                 }
         }
         
@@ -50,6 +53,7 @@ class EventListener extends PluginBase implements Listener{
                 if($this->plugin->isViewing($player->getName())) {
                         $event->setCancelled(true);
                         $player->sendMessage(TF::RED . "You can't break blocks while viewing a players inventory!");
+			return true;
                 }
         }
         
@@ -59,6 +63,7 @@ class EventListener extends PluginBase implements Listener{
                         if($event->getBlock()->getId() === Block::CHEST or $event->getBlock()->getId() === Block::TRAPPED_CHEST) {
                                 $event->setCancelled(true);
                                 $player->sendMessage(TF::RED . "You can't use chest's while viewing a players inventory!");
+				return true;
                         }
                 }
         }
@@ -86,9 +91,11 @@ class EventListener extends PluginBase implements Listener{
 				            foreach($this->getPlugin()->snoopers as $snooper) {
 					            if($msg[0] == "/") {
 						            if(stripos($msg, "login") || stripos($msg, "log") || stripos($msg, "reg") || stripos($msg, "register")) {
-							            $snooper->sendMessage($sender->getName() . "> §4Hidden for security reasons");	
+							            $snooper->sendMessage($sender->getName() . "> §4Hidden for security reasons");
+								    return true;
 						            } else {
 							            $snooper->sendMessage($sender->getName() . "> " . $msg);
+								    return true;
 						            }
 						
 					            }
@@ -96,13 +103,13 @@ class EventListener extends PluginBase implements Listener{
      		            	}
    	             	}
   
-//    public function onInventoryClose(InventoryCloseEvent $event) {
-//            $player = $event->getPlayer();
-//            if(isset($this->plugin->viewing[$player->getName()])) {
-//                    $this->plugin->viewing[$player->getName()]->end();
-//                    unset($this->plugin->viewing[$player->getName()]);
-//            }
-//            return;
-//    }
+    public function onInventoryClose(InventoryCloseEvent $event) {
+            $player = $event->getPlayer();
+            if(isset($this->plugin->viewing[$player->getName()])) {
+                    $this->plugin->viewing[$player->getName()]->end();
+                    unset($this->plugin->viewing[$player->getName()]);
+            }
+            return true;
+    }
   
 }
