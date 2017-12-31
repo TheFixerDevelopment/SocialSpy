@@ -29,6 +29,7 @@ class ViewInv {
                 $this->owner->getInventory()->setContents($this->target->getInventory()->getContents());
                 $this->owner->getInventory()->sendContents($this->owner);
                 $this->owner->sendMessage(TF::GREEN . "You are now viewing " . TF::BOLD . TF::DARK_AQUA . $this->target->getName() . TF::RESET . TF::GREEN . "'s inventory, run " . TF::BOLD . TF::DARK_AQUA . "/viewinv" . TF::RESET . TF::GREEN . " to exit.");
+                return true;
                 
         }
         
@@ -41,7 +42,8 @@ class ViewInv {
                         $this->owner->getInventory()->sendContents($this->owner);
                         $this->lastKnownInv = null;
                         $this->owner->sendMessage(TF::GOLD . "You are no longer viewing " . TF::BOLD . TF::DARK_AQUA . $this->target->getName() . TF::RESET . TF::GOLD . "'s inventory!");
-                }
+                        return true;
+                }  
         }
         
         public function end() {
