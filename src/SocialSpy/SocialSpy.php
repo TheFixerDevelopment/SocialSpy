@@ -45,12 +45,12 @@ class SocialSpy extends PluginBase{
 		$nick = strtolower($player->getName());
 		
 		$this->authorized[$nick] = true;
-		return;
+		return true;
 	}
 	
 	public function deauthorize(Player $player){
 		unset($this->authorized[strtolower($player->getName())]);
-		return;
+		return true;
 	}
 	
 	public function registerCommands() {
@@ -58,10 +58,12 @@ class SocialSpy extends PluginBase{
                 $cmd->setDescription("View a players inventory");
                 $cmd->setExecutor(new ViewInv($this));
                 $this->getServer()->getCommandMap()->register("ic", $cmd);
+		return true;
         }
 
   	public function viewInventory(Player $player, Player $target) {
           	$this->viewing[$player->getName()] = new ViewSession($player, $target, true);
+		return true;
         }
         
   	public function isViewing($name) {
